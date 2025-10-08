@@ -1,12 +1,13 @@
+import {Header} from './components/Header'
 
-
+import './index.css'
 
 function App() {
   
 
   return (
     <>
-      <h1>Hola Mundo!</h1>
+      <Header title='Soy un logo' />
     </>
   )
 }
