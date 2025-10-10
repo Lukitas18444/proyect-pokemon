@@ -4,8 +4,13 @@
 }
 
 body{
-    background-color: rgb(148, 205, 255);
     color: rgb(214, 214, 214);
+    background-image: url('./assets/Pueblo_Paleta_HGSS.webp');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
 }
 
 .header{
