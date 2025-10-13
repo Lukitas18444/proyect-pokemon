@@ -1,6 +1,6 @@
-import {Routes, Route, BroswerRouter} from 'react-router-dom'
 
-import {Pokemon} from '../pages/pokemon'
+
+
 
 export const Nav = () => {
     const navItem = [
@@ -11,23 +11,17 @@ export const Nav = () => {
 
 
   return (
-<BroswerRouter>
-    <Routes>
-        <nav>
+<nav>
             <ul>
                 {navItem.map((item, index)=>(
-                    <Route>
+
                         <li key={index}>
                         <a href={item.href}> {item.label} </a>
                     </li>
-                    </Route>
+
                 ))}
             </ul>
         </nav>
-
-    </Routes>
-   
-</BroswerRouter>
         
 
 

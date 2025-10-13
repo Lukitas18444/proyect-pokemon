@@ -7,7 +7,7 @@ interface Props{
 const DataPokemon  = (url) => { 
 
     const [resultado, setResultado] = useState({cargando:true, data:null})
-    /* const url = 'https://pokeapi.co/api/v2/pokemon/' */
+
     
     useEffect(()=>{
         getDatos(url)
@@ -15,7 +15,6 @@ const DataPokemon  = (url) => {
 
     async function  getDatos (url: Props){
         try{
-            /* setResultado ({cargando:true, data:null}) */
             const resp= await fetch (url)
             const data = await resp.json();
             setResultado({cargando:false, data})
@@ -26,17 +25,7 @@ const DataPokemon  = (url) => {
         }
     }
 
-    /* const AllPokemons = () =>{
-        for (let index = 0; index < 100; index++) {
-            AllPokemons(index)
-            
-        }
-    }
 
-    useEffect(() => {
-        console.log(DataPokemon)
-    },[DataPokemon])
- */
   return (
     resultado
   )
