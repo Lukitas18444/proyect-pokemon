@@ -30,3 +30,12 @@ body{
     gap: 0 10px;
     list-style: none;
 }
+.container-descripcion{
+    padding: 40px 10px;
+    border: white 10px solid;
+    background-color: rgb(78, 12, 12);
+    width: 80%;
+    height: 200px;
+    margin: 5% auto;
+    text-align: center;
+}

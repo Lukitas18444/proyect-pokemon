@@ -1,4 +1,6 @@
+
 import { Nav } from "./Nav";
+
 
 interface Props{
     title: string;
@@ -8,11 +10,13 @@ interface Props{
   
 return (
     <>
-    <div className="header">{title}
-    <Nav/>
+
+        <div className="header">{title}
+        <Nav/>
       
 
-    </div>
+        </div>
+    
     </>
   )
 }

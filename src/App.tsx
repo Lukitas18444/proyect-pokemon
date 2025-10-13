@@ -10,6 +10,7 @@ function App() {
   return (
     <>
       <Header title='Soy un logo' />
+      
       <SectionDescription  />
     </>
   )

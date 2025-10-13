@@ -1,3 +1,10 @@
+/* import  DataPokemon from "../componentsPokemon.tsx/DataPokemon" */
+/* import { Pokemon } from "../componentsPokemon.tsx/Pokemon" */
+
+
+
+
+import {RandomPokemon} from '../componentsPokemon.tsx/RandomPokemon'
 
 
 const SectionDescription = (  ) => {
@@ -7,7 +14,7 @@ const SectionDescription = (  ) => {
             En esta pagina podas encontrar todos los datos de tus pokemons favoritos.
             <br /> Como este ejemplo: 
         </p>
-        <div>Soy un ejemplo</div>
+        <div> <RandomPokemon/></div>
     </div>
    ) 
 }
