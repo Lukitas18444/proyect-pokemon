@@ -1,102 +1,102 @@
 import React, { useState } from 'react';
 
-
-interface PokemonResult {
+// Define un tipo para el Pokémon que vamos a guardar (simplificado)
+interface PokemonData {
+    id: number;
     name: string;
-    url: string;
+    // Puedes añadir más propiedades como 'sprites', 'types', etc., si las necesitas
+    spriteUrl: string; 
 }
 
-
-
 export const RandomPokemon = () => {
-
-    const [listaPokemon, setListaPokemon] = useState<PokemonResult[]>([]);
-
+    // 1. Estado para guardar los datos del Pokémon aleatorio individual
+    const [pokemonAleatorio, setPokemonAleatorio] = useState<PokemonData | null>(null);
+    // 2. Estado para manejar el estado de carga
     const [estaCargando, setEstaCargando] = useState(false);
-
+    // 3. Estado para manejar errores
     const [error, setError] = useState<string | null>(null);
-/*     const [numeroPokemon, setNumeroPokemon] = useState(20) */
 
+    // Genera un ID aleatorio cada vez que el componente se renderiza.
+    // Lo ideal es generar esto DENTRO de la función de búsqueda para que cambie al hacer clic.
+    // Sin embargo, si quieres que el ID sea fijo por render, lo dejas aquí:
+    // const idAleatorio = Math.floor(Math.random() * 100 + 1); // Rango del 1 al 100
 
-    const idAleatorio = Math.floor(Math.random() * 100 + 1);
-    const base_url = `https://pokeapi.co/api/v2/item/${idAleatorio}/`;
+    // Función asíncrona para buscar un Pokémon específico por ID
+    const buscarPokemonAleatorio = async () => {
+        // 1. Generar un nuevo ID aleatorio justo antes de la búsqueda
+        const nuevoIdAleatorio = Math.floor(Math.random() * 898) + 1; // Rango: 1 a 898 (Gen 8)
+        const url_con_id = `https://pokeapi.co/api/v2/pokemon/${nuevoIdAleatorio}`;
 
-
-    const buscarPokemon = async () => {
         setEstaCargando(true);
         setError(null);
+        setPokemonAleatorio(null); // Limpiar el anterior
+
         try {
-        
-            const respuesta = await fetch(base_url);
+            const respuesta = await fetch(url_con_id);
             
             if (!respuesta.ok) {
-                throw new Error(`¡Error HTTP! estado: ${respuesta.status}`);
+                throw new Error(`¡Error HTTP! Estado: ${respuesta.status}. ¿Existe el ID ${nuevoIdAleatorio}?`);
             }
             
             const datos = await respuesta.json();
-          
-            setListaPokemon(datos.results);
+            
+            // 2. Mapear los datos de la API al formato que queremos guardar en el estado
+            const dataMapeada: PokemonData = {
+                id: datos.id,
+                name: datos.name,
+                // Usamos el sprite frontal por defecto
+                spriteUrl: datos.sprites.front_default, 
+            };
+
+            // 3. Guardar el único Pokémon en el estado
+            setPokemonAleatorio(dataMapeada);
+            
         } catch (err) {
-          
             const mensaje = err instanceof Error ? err.message : 'Ocurrió un error desconocido';
             setError(`Fallo al buscar Pokémon: ${mensaje}`);
             console.error(err);
         } finally {
-        
             setEstaCargando(false);
         }
     };
 
-/*     const mostrarMas = () => {
-      if(limit === 20){
-        mostrarMas === null
-        setLimit(limit + 20)
-      }   else{
-        setLimit(limit + 20)
-        buscarPokemon()
-      }
- } */
-
-    
+    // Lógica de renderizado
     return (
         <div>
-            <h2>ID Aleatorio: {idAleatorio} </h2>
-            <h3>URL Base de la API: {base_url} </h3>
+            <h1>Buscador de Pokémon Aleatorio</h1>
             
-            {/* <button onClick={buscarPokemon} disabled={estaCargando}>
-                {estaCargando ? 'Cargando...' : 'Buscar Lista de Pokémon'}
-            </button> */}
-          {/*   
-            <button onClick={mostrarMas}>
-              Mostrar mas Pokemon
-            </button> */}
+            <button onClick={buscarPokemonAleatorio} disabled={estaCargando}>
+                {estaCargando ? 'Buscando...' : 'Buscar Pokémon Aleatorio'}
+            </button>
+            
+            <hr />
 
+            {/* Renderizado Condicional */}
 
-
-            <h2>Lista de Pokémon</h2>
-
-           
             {error && <p style={{ color: 'red' }}>Error: {error}</p>}
             
-            {estaCargando && <p>Cargando Pokémon...</p>}
+            {estaCargando && <p>Cargando un Pokémon sorpresa...</p>}
 
-           
-            {!estaCargando && listaPokemon.length > 0 && (
-                <ul>
-                   
-                    {listaPokemon.map((pokemon) => (
-                        <li key={pokemon.name}>
-                            <strong>{pokemon.name}</strong> 
-                        </li>
-                    ))}
-                </ul>
+            {/* Mostrar el Pokémon si ya se ha cargado */}
+            {!estaCargando && pokemonAleatorio && (
+                <div style={{ border: '1px solid #ccc', padding: '15px', maxWidth: '300px', margin: '20px auto', textAlign: 'center' }}>
+                    <h2>¡Has encontrado a #{pokemonAleatorio.id}!</h2>
+                    <h3>{pokemonAleatorio.name.toUpperCase()}</h3>
+                    {pokemonAleatorio.spriteUrl ? (
+                        <img 
+                            src={pokemonAleatorio.spriteUrl} 
+                            alt={`Imagen de ${pokemonAleatorio.name}`} 
+                            style={{ width: '150px', height: '150px' }}
+                        />
+                    ) : (
+                        <p>No hay imagen disponible.</p>
+                    )}
+                </div>
             )}
             
-            {!estaCargando && listaPokemon.length === 0 && !error && (
-                <p>Haz clic en el botón para cargar los primeros 20 Pokémon.</p>
+            {!estaCargando && !pokemonAleatorio && !error && (
+                <p>Haz clic en el botón para encontrar tu primer Pokémon aleatorio.</p>
             )}
         </div>
     );
 };
-
-
