@@ -15,7 +15,7 @@ export const RandomPokemon = () => {
     const [estaCargando, setEstaCargando] = useState(false);
 
     const [error, setError] = useState<string | null>(null);
-/*     const [numeroPokemon, setNumeroPokemon] = useState(20) */
+    const [numeroPokemon, setNumeroPokemon] = useState(20)
 
 
     const idAleatorio = Math.floor(Math.random() * 100 + 1);
@@ -47,7 +47,7 @@ export const RandomPokemon = () => {
         }
     };
 
-/*     const mostrarMas = () => {
+    const mostrarMas = () => {
       if(limit === 20){
         mostrarMas === null
         setLimit(limit + 20)
@@ -55,7 +55,7 @@ export const RandomPokemon = () => {
         setLimit(limit + 20)
         buscarPokemon()
       }
- } */
+ }
 
     
     return (
@@ -63,13 +63,13 @@ export const RandomPokemon = () => {
             <h2>ID Aleatorio: {idAleatorio} </h2>
             <h3>URL Base de la API: {base_url} </h3>
             
-            {/* <button onClick={buscarPokemon} disabled={estaCargando}>
+            {<button onClick={buscarPokemon} disabled={estaCargando}>
                 {estaCargando ? 'Cargando...' : 'Buscar Lista de Pokémon'}
-            </button> */}
-          {/*   
+            </button> }
+          {   
             <button onClick={mostrarMas}>
               Mostrar mas Pokemon
-            </button> */}
+            </button> }
 
 
 

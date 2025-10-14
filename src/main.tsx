@@ -5,15 +5,17 @@ import App from './App.tsx'
 import { BrowserRouter, createBrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom'
 
 
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <h1>Home</h1>
+    element: App()
   },
   {
     path:'/:pokeId',
     element:<h1>Datos</h1>
   }
+
 ])
 
 createRoot(document.getElementById('root')!).render(
