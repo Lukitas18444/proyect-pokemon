@@ -1,19 +1,28 @@
 
-
-import Header from './components/Header';
+import { Routes, Route } from 'react-router-dom';
+// Importa tus componentes
+import NavLayout from './components/Nav.tsx'; // O donde lo hayas definido
+import {ListaPokemons} from './componentsPokemon.tsx/ListaPokemons.tsx'; 
+import {Detalle }from './componentsPokemon.tsx/Detalle.tsx'; 
 import { RandomPokemon } from './componentsPokemon.tsx/RandomPokemon.tsx';
 
 import './index.css'
 
-function App() {
+const App = () => (
   
+    <Routes>
+        <Route path="/" element={<NavLayout />}> 
 
-  return (
-    <>
-      <Header title='Soy un logo' />
-      <RandomPokemon/>
-    </>
-  )
-}
+            <Route index element={<RandomPokemon />} /> 
+            
 
-export default App
+            <Route path="/ListaPokemons" element={<ListaPokemons />} /> 
+
+            <Route path="pokemon/:nombre" element={<Detalle />} /> 
+            
+            <Route path="*" element={<h2>404 - Página no encontrada</h2>} />
+        </Route>
+    </Routes>
+);
+
+export default App;

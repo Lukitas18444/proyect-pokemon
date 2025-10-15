@@ -15,7 +15,7 @@ export const RandomPokemon = () => {
 
     const buscarPokemonAleatorio = async () => {
 
-        const nuevoIdAleatorio = Math.floor(Math.random() * 898) + 1; 
+        const nuevoIdAleatorio = Math.floor(Math.random() * 1024 ) + 1; 
         const url_con_id = `https://pokeapi.co/api/v2/pokemon/${nuevoIdAleatorio}`;
 
         setEstaCargando(true);
@@ -30,7 +30,6 @@ export const RandomPokemon = () => {
             }
             
             const datos = await respuesta.json();
-            
 
             const dataMapeada: PokemonData = {
                 id: datos.id,
@@ -53,11 +52,12 @@ export const RandomPokemon = () => {
 
 
     return (
-        <div>
-            <h1>Buscador de Pokémon Aleatorio</h1>
+        <div className='container-descripcion'>
+            <h1>Bienvenidxs al buscador de Pokemons!</h1>
+            <h2>Aquí encontraras a todos los pokemones con sus</h2>
             
             <button onClick={buscarPokemonAleatorio} disabled={estaCargando}>
-                {estaCargando ? 'Buscando...' : 'Buscar Pokémon Aleatorio'}
+                {estaCargando ? 'Buscando...' : 'Pokémon Aleatorio'}
             </button>
             
             <hr />

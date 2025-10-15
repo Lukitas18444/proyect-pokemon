@@ -13,7 +13,7 @@ body{
 
 }
 
-.header{
+.nav{
     background-color: rgb(78, 12, 12);
     padding: 20px 0;
     gap: 10px 0;
@@ -22,20 +22,31 @@ body{
     align-items: center;
 }
 
-.header .container-nav{
+
+.pokemon-logo{
+    height: 10%;
+    width: 10%;
+}
+.nav-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    gap: 0 10px;
-    list-style: none;
+    gap: 0 25px;
 }
+
+.nav-container a{
+    color: white;
+    list-style: none;
+    text-decoration: none;
+    gap: 0 25px;
+}
+
+
 .container-descripcion{
     padding: 40px 10px;
     border: white 10px solid;
     background-color: rgb(78, 12, 12);
     width: 80%;
-    height: 200px;
     margin: 5% auto;
     text-align: center;
 }
