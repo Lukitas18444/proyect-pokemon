@@ -53,7 +53,8 @@ export const ListaPokemons = () => {
                     name: pokemon.name,
                     url: pokemon.url,
                     spriteUrl: datosDetalle.sprites.front_default, 
-                    weight: pokemon.weight
+                    weight: datosDetalle.weight,
+                    id:datosDetalle.id,
                 }))
         );
 
@@ -86,7 +87,8 @@ export const ListaPokemons = () => {
 
     const manejarBusqueda = () => {
 
-        const nombreLimpio = filtroNombre.trim().toLowerCase();
+        const nombreLimpio = filtroNombre.trim().toLowerCase().replace(/\s/g, '');
+        
         
         if (nombreLimpio) {
             navigate(`/pokemon/${nombreLimpio}`);
@@ -126,20 +128,19 @@ export const ListaPokemons = () => {
             {!estaCargando && listaPokemon.length > 0 && (
                 <ul>
                     {listaPokemon.map((pokemon) => (
-                        <li key={pokemon.name}>
+                        <button onClick={() => manejarClickDetalles(pokemon.name)} >
+                        <li key={pokemon.name} className='item-pokemon'>
+                            <p>N°: {pokemon.id} </p>
                             <strong>{pokemon.name}</strong> 
                             <img 
                             src={pokemon.spriteUrl} 
                             alt={`Imagen de ${pokemon.name}`} 
                             style={{ width: '150px', height: '150px' }}
                             />
-                            <p> {pokemon.weight} </p>
-                            <button 
-                                onClick={() => manejarClickDetalles(pokemon.name)} 
-                            >
-                                Ver Detalles
-                            </button>
+                            <p> Peso: {pokemon.weight} </p>
                         </li>
+                        </button>
+
                     ))}
                 </ul>
             )}

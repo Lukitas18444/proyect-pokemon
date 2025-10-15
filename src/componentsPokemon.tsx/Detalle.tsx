@@ -1,6 +1,5 @@
-
-    
 import React, { useState, useEffect } from 'react';
+import {Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 interface PokemonDetalles {
@@ -59,6 +58,9 @@ export const Detalle = () => {
 
     return (
         <div>
+            <Link to= "/ListaPokemons" >
+            Volver a la lista de Pokemons
+            </Link>
             <h1>Detalles de {detalles.name.toUpperCase()}</h1>
             <p>ID: {detalles.id}</p>
             <p>Altura: {detalles.height} dm</p>
