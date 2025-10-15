@@ -4,9 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import '../index.css'
 
 interface PokemonResult {
+    id: number;
     name: string;
-    url: string;
-    currentOffset: number;
+    url?: string;
+    spriteUrl?: string; 
+    weight ?: number;
+    pokemon:string
 }
 
 
@@ -41,11 +44,26 @@ export const ListaPokemons = () => {
             }
             
             const datos = await respuesta.json();
+            const informacion = datos.results
+            
+            const promesasDetalle = informacion.map((pokemon: PokemonResult) => 
+            fetch(pokemon.url) 
+                .then(res => res.json())
+                .then(datosDetalle => ({
+                    name: pokemon.name,
+                    url: pokemon.url,
+                    spriteUrl: datosDetalle.sprites.front_default, 
+                    weight: pokemon.weight
+                }))
+        );
+
+        const listaCompleta = await Promise.all(promesasDetalle);
+
 
             if (currentOffset === 0) {
-                setListaPokemon(datos.results);
+                setListaPokemon(listaCompleta);
             } else {
-                setListaPokemon(prevLista => [...prevLista, ...datos.results]);
+                setListaPokemon(prevLista => [...prevLista, ...listaCompleta]);
             }
 
         } catch (err) {
@@ -105,14 +123,17 @@ export const ListaPokemons = () => {
                 </button>
             </div>
 
-            {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-            {estaCargando && <p>Cargando Pokémon...</p>}
-
             {!estaCargando && listaPokemon.length > 0 && (
                 <ul>
                     {listaPokemon.map((pokemon) => (
                         <li key={pokemon.name}>
                             <strong>{pokemon.name}</strong> 
+                            <img 
+                            src={pokemon.spriteUrl} 
+                            alt={`Imagen de ${pokemon.name}`} 
+                            style={{ width: '150px', height: '150px' }}
+                            />
+                            <p> {pokemon.weight} </p>
                             <button 
                                 onClick={() => manejarClickDetalles(pokemon.name)} 
                             >

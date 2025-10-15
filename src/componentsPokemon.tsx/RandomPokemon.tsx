@@ -31,6 +31,8 @@ export const RandomPokemon = () => {
             
             const datos = await respuesta.json();
 
+            
+
             const dataMapeada: PokemonData = {
                 id: datos.id,
                 name: datos.name,
