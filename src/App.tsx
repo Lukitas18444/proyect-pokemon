@@ -1,7 +1,6 @@
 
 import { Routes, Route } from 'react-router-dom';
-// Importa tus componentes
-import NavLayout from './components/Nav.tsx'; // O donde lo hayas definido
+import NavLayout from './components/Nav.tsx';
 import {ListaPokemons} from './componentsPokemon.tsx/ListaPokemons.tsx'; 
 import {Detalle }from './componentsPokemon.tsx/Detalle.tsx'; 
 import { RandomPokemon } from './componentsPokemon.tsx/RandomPokemon.tsx';

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import '../index.css'
 
 interface PokemonResult {
     name: string;
     url: string;
+    currentOffset: number;
 }
 
 
@@ -18,47 +20,90 @@ export const ListaPokemons = () => {
 
     const [error, setError] = useState<string | null>(null);
 
+    const [filtroNombre, setFiltroNombre] = useState('');
 
+    
+    const [offset, setOffset] = useState(0);
+    
 
-    const base_url = `https://pokeapi.co/api/v2/pokemon`;
-
-
-    const buscarPokemon = async () => {
+    const limit = 20;
+    
+    const buscadorPokemon = async (currentOffset: number) => {
         setEstaCargando(true);
         setError(null);
         try {
-        
-            const respuesta = await fetch(base_url);
+
+            const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${currentOffset}`;
+            const respuesta = await fetch(url);
             
             if (!respuesta.ok) {
                 throw new Error(`¡Error HTTP! estado: ${respuesta.status}`);
             }
             
             const datos = await respuesta.json();
-          
-            setListaPokemon(datos.results);
+
+            if (currentOffset === 0) {
+                setListaPokemon(datos.results);
+            } else {
+                setListaPokemon(prevLista => [...prevLista, ...datos.results]);
+            }
+
         } catch (err) {
-          
             const mensaje = err instanceof Error ? err.message : 'Ocurrió un error desconocido';
             setError(`Fallo al buscar Pokémon: ${mensaje}`);
             console.error(err);
         } finally {
-        
             setEstaCargando(false);
         }
-          
     };
+
+    useEffect(() => {
+        buscadorPokemon(0);
+    }, []); 
+
 
     const manejarClickDetalles = (pokemonName: string) => {
         navigate(`/pokemon/${pokemonName}`);
     };
 
+    const manejarBusqueda = () => {
+
+        const nombreLimpio = filtroNombre.trim().toLowerCase();
+        
+        if (nombreLimpio) {
+            navigate(`/pokemon/${nombreLimpio}`);
+        } else {
+            alert('Por favor, ingresa un nombre de Pokémon para buscar.');
+        }
+    };
+
+    const manejarMostrarMas = () => {
+        const nuevoOffset = offset + limit;
+        setOffset(nuevoOffset); 
+        buscadorPokemon(nuevoOffset); 
+    };
     
     return (
-        <div>
-            <button onClick={buscarPokemon}>Buscar</button>
-            
+        <div className='container-lista'>
+               
             <h2>Lista de Pokémon</h2>
+
+            <div>
+                <input 
+                    type="text"
+                    value={filtroNombre}
+                    onChange={(e) => setFiltroNombre(e.target.value)}
+                    placeholder="Buscar Pokémon por nombre..."  
+                    disabled={estaCargando}
+                />
+                
+                <button 
+                    onClick={manejarBusqueda} 
+                    disabled={estaCargando}
+                >
+                    Buscar
+                </button>
+            </div>
 
             {error && <p style={{ color: 'red' }}>Error: {error}</p>}
             {estaCargando && <p>Cargando Pokémon...</p>}
@@ -68,18 +113,25 @@ export const ListaPokemons = () => {
                     {listaPokemon.map((pokemon) => (
                         <li key={pokemon.name}>
                             <strong>{pokemon.name}</strong> 
-                            
                             <button 
                                 onClick={() => manejarClickDetalles(pokemon.name)} 
-                                style={{ marginLeft: '10px' }}
                             >
                                 Ver Detalles
                             </button>
-                            
                         </li>
                     ))}
                 </ul>
             )}
+
+            <div >
+                    <button 
+                        onClick={manejarMostrarMas} 
+                        disabled={estaCargando}
+                    >
+                        {estaCargando ? 'Cargando...' : 'Mostrar Más'}
+                    </button>
+            </div>
+
 
             {!estaCargando && listaPokemon.length === 0 && !error && (
                 <p>Haz clic en el botón para cargar los primeros 20 Pokémon.</p>

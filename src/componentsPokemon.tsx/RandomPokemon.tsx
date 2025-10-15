@@ -54,9 +54,11 @@ export const RandomPokemon = () => {
     return (
         <div className='container-descripcion'>
             <h1>Bienvenidxs al buscador de Pokemons!</h1>
-            <h2>Aquí encontraras a todos los pokemones con sus</h2>
+            <h2>Aquí encontraras a todos los pokemones con sus habilidades y detalles.</h2>
+            <p>Toca el botón para ver el ejemplo</p>
             
             <button onClick={buscarPokemonAleatorio} disabled={estaCargando}>
+              
                 {estaCargando ? 'Buscando...' : 'Pokémon Aleatorio'}
             </button>
             
@@ -84,9 +86,7 @@ export const RandomPokemon = () => {
                 </div>
             )}
             
-            {!estaCargando && !pokemonAleatorio && !error && (
-                <p>Haz clic en el botón para encontrar tu primer Pokémon aleatorio.</p>
-            )}
+
         </div>
     );
 };

@@ -49,4 +49,27 @@ body{
     width: 80%;
     margin: 5% auto;
     text-align: center;
+    gap: 20px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+.container-descripcion hr{
+    width: 80%;
+}
+
+
+.container-lista{
+    padding: 40px 10px;
+    border: white 10px solid;
+    background-color: rgb(78, 12, 12);
+    width: 80%;
+    margin: 5% auto;
+    text-align: center;
+    gap: 20px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}   
