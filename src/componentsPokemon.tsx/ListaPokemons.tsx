@@ -137,7 +137,6 @@ export const ListaPokemons = () => {
                             alt={`Imagen de ${pokemon.name}`} 
                             style={{ width: '150px', height: '150px' }}
                             />
-                            <p> Peso: {pokemon.weight} </p>
                         </li>
                         </button>
 

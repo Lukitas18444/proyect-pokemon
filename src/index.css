@@ -83,29 +83,66 @@ ul{
 }
 
 .item-pokemon{
-    background-color: blue;
-    list-style: none;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 2px solid black;
-    border-radius: 25px;
     padding: 10px;
 }
 
 
 /* aleatorio------------*/
 
-.container-card-aleatorio{
+.container-card-aleatorio, .item-pokemon{
     border: 1px solid black;
     padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0px 0px 10px 1px black;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)),
+    url('https://external-preview.redd.it/aC7zQKO6GH1UVuAB_K31hwncC23H-O3C1-CJODnHB_U.png?width=640&crop=smart&auto=webp&s=2390ffe7bbf0a6149dc6233a6f38d7eee143085b');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .container-card-aleatorio img{
     width: 100%;
     height: auto;
+    max-width: 250px;
+}
+.container-descripcion-lista{
+    padding: 40px 10px;
+    border: white 10px solid;
+    background-color: rgb(78, 12, 12);
+    width: 80%;
+    margin: 5% auto;
+    text-align: center;
+    gap: 20px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 
 
 /* fin aleatorio------------*/
+
+/* footer------------*/
+
+.footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px 0;
+    width: 100%;
+    bottom: 0;
+    margin-top: 30%;
+    background-color: rgb(78, 12, 12);
+    padding: 50px 0;
+}
+
+
+
+
+/* footer-----------*/
