@@ -46,8 +46,8 @@ export const Detalle = () => {
                 const datosMapeados: PokemonDetalles = {
                 id: datos.id,
                 name: datos.name,
-                height: datos.height,
-                weight: datos.weight,
+                height: datos.height /10,
+                weight: datos.weight /10,
                 types:datos.types,
                 spriteUrl: datos.sprites.other['official-artwork']?.front_default || datos.sprites.front_default || '',
             };
@@ -102,9 +102,12 @@ export const Detalle = () => {
 
     return (
         <div>
+            <p className='button-volver'>
             <Link to= "/ListaPokemons" >
-            Volver a la lista de Pokemons
+                Volver a la lista de Pokemons
             </Link>
+            </p>
+
             <div className='container-detalle'>
                 <h1 className='h1'>Detalles de {detalles.name.toUpperCase()}</h1>
                 <hr />
@@ -113,9 +116,9 @@ export const Detalle = () => {
                     alt={`Imagen de ${detalles.name}`} 
                 />
                 <div className="container-detalle-items">
-                    <p>ID: {detalles.id}</p>
-                    <p>Altura: {detalles.height} dm</p>
-                    <p>Peso: {detalles.weight} hg</p>
+                    <p>N° de Pókemon: {detalles.id}</p>
+                    <p>Altura: {detalles.height} m</p>
+                    <p>Peso: {detalles.weight} kg</p>
                 </div>
                 <p className='container-detalle-tipos'>
                         Tipo(s):
