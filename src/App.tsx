@@ -20,6 +20,8 @@ const App = () => (
             <Route path="pokemon/:nombre" element={<Detalle />} /> 
             
             <Route path="*" element={<h2>404 - Página no encontrada</h2>} />
+                        
+
         </Route>
     </Routes>
 );

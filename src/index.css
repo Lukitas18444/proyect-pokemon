@@ -93,3 +93,19 @@ ul{
     border-radius: 25px;
     padding: 10px;
 }
+
+
+/* aleatorio------------*/
+
+.container-card-aleatorio{
+    border: 1px solid black;
+    padding: 20px;
+}
+.container-card-aleatorio img{
+    width: 100%;
+    height: auto;
+}
+
+
+
+/* fin aleatorio------------*/

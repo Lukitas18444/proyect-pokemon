@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 interface PokemonData {
     id: number;
@@ -73,14 +75,13 @@ export const RandomPokemon = () => {
             {estaCargando && <p>Cargando un Pokémon sorpresa...</p>}
 
             {!estaCargando && pokemonAleatorio && (
-                <div style={{ border: '1px solid #ccc', padding: '15px', maxWidth: '300px', margin: '20px auto', textAlign: 'center' }}>
+                <div className='container-card-aleatorio'>
                     <h2>¡Has encontrado a #{pokemonAleatorio.id}!</h2>
                     <h3>{pokemonAleatorio.name.toUpperCase()}</h3>
                     {pokemonAleatorio.spriteUrl ? (
                         <img 
                             src={pokemonAleatorio.spriteUrl} 
                             alt={`Imagen de ${pokemonAleatorio.name}`} 
-                            style={{ width: '150px', height: '150px' }}
                         />
                     ) : (
                         <p>No hay imagen disponible.</p>
@@ -89,6 +90,9 @@ export const RandomPokemon = () => {
             )}
             
 
+
         </div>
+
+        
     );
 };
