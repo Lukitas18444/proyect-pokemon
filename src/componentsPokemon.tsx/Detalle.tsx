@@ -7,7 +7,19 @@ interface PokemonDetalles {
     name: string;
     height: number;
     weight: number;
+    spriteUrl: string;
+    types: PokemonTypeEntry[]
+
 }
+interface PokemonType {
+    name: string;
+    url: string;
+}
+interface PokemonTypeEntry {
+    slot: number;
+    type: PokemonType;
+}
+
 
 export const Detalle = () => {
     const { nombre } = useParams<{ nombre: string }>();
@@ -30,7 +42,17 @@ export const Detalle = () => {
                 }
                 
                 const datos = await respuesta.json();
-                setDetalles(datos);
+
+                const datosMapeados: PokemonDetalles = {
+                id: datos.id,
+                name: datos.name,
+                height: datos.height,
+                weight: datos.weight,
+                types:datos.types,
+                spriteUrl: datos.sprites.other['official-artwork']?.front_default || datos.sprites.front_default || '',
+            };
+
+                setDetalles(datosMapeados);
             } catch (err) {
                 const mensaje = err instanceof Error ? err.message : 'Ocurrió un error desconocido';
                 setError(`Fallo al cargar los detalles: ${mensaje}`);
@@ -55,16 +77,62 @@ export const Detalle = () => {
     if (!detalles) {
         return <h2>No se encontraron detalles para {nombre}.</h2>;
     }
+    const tiposEspañol: { [key: string]: string } = {
+    'normal': 'Normal',
+    'fighting': 'Lucha',
+    'flying': 'Volador',
+    'poison': 'Veneno',
+    'ground': 'Tierra',
+    'rock': 'Roca',
+    'bug': 'Bicho',
+    'ghost': 'Fantasma',
+    'steel': 'Acero',
+    'fire': 'Fuego',
+    'water': 'Agua',
+    'grass': 'Planta',
+    'electric': 'Eléctrico',
+    'psychic': 'Psíquico',
+    'ice': 'Hielo',
+    'dragon': 'Dragón',
+    'fairy': 'Hada',
+    'dark': 'Siniestro',
+    'unknow': 'Desconocido',
+    'shadow': 'Sombra'
+};
 
     return (
         <div>
             <Link to= "/ListaPokemons" >
             Volver a la lista de Pokemons
             </Link>
-            <h1>Detalles de {detalles.name.toUpperCase()}</h1>
-            <p>ID: {detalles.id}</p>
-            <p>Altura: {detalles.height} dm</p>
-            <p>Peso: {detalles.weight} hg</p>
+            <div className='container-detalle'>
+                <h1 className='h1'>Detalles de {detalles.name.toUpperCase()}</h1>
+                <hr />
+                <img 
+                    src={detalles.spriteUrl} 
+                    alt={`Imagen de ${detalles.name}`} 
+                />
+                <div className="container-detalle-items">
+                    <p>ID: {detalles.id}</p>
+                    <p>Altura: {detalles.height} dm</p>
+                    <p>Peso: {detalles.weight} hg</p>
+                </div>
+                <p className='container-detalle-tipos'>
+                        Tipo(s):
+                        {detalles.types.map((typeEntry, index) => {
+                   
+                            const tipoEnIngles = typeEntry.type.name;
+                            const tipoEnEspanol = tiposEspañol[tipoEnIngles] || tipoEnIngles;
+                    return(
+                    <span key={index}>
+                        {tipoEnEspanol}
+                        {index < detalles.types.length - 1 ? ', ' : ''}
+                    </span>
+                );
+            })}
+                    </p>
+
+            </div>
         </div>
     );
 };

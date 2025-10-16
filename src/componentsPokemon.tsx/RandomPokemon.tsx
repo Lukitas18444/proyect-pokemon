@@ -147,7 +147,7 @@ const irALista = () => {
                     </span>
                 );
             })}
-</p>
+                    </p>
                 </div>
             )}
             

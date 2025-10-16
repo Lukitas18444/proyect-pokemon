@@ -137,14 +137,13 @@ export const ListaPokemons = () => {
             {!estaCargando && listaPokemon.length > 0 && (
                 <ul>
                     {listaPokemon.map((pokemon) => (
-                        <button onClick={() => manejarClickDetalles(pokemon.name)} >
+                        <button className='button-card' onClick={() => manejarClickDetalles(pokemon.name)} >
                         <li key={pokemon.name} className='item-pokemon'>
                             <p>N°: {pokemon.id} </p>
                             <strong>{pokemon.name}</strong> 
                             <img 
                             src={pokemon.spriteUrl} 
                             alt={`Imagen de ${pokemon.name}`} 
-                            style={{ width: '150px', height: '150px' }}
                             />
                         </li>
                         </button>
