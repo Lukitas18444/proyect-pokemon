@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import '../index.css'
@@ -9,7 +9,7 @@ interface PokemonResult {
     url?: string;
     spriteUrl?: string; 
     weight ?: number;
-    pokemon:string
+    pokemon: URL;
 }
 
 
@@ -47,6 +47,7 @@ export const ListaPokemons = () => {
             const informacion = datos.results
             
             const promesasDetalle = informacion.map((pokemon: PokemonResult) => 
+                pokemon.url ?
             fetch(pokemon.url) 
                 .then(res => res.json())
                 .then(datosDetalle => ({
@@ -56,7 +57,15 @@ export const ListaPokemons = () => {
                     weight: datosDetalle.weight,
                     id:datosDetalle.id,
                 }))
-        );
+                : Promise.resolve({
+                    name: pokemon.name,
+                    url: '',
+                    spriteUrl: '',
+                    weight: 0,
+                    id: 0,
+                })
+            );
+        
 
         const listaCompleta = await Promise.all(promesasDetalle);
 
