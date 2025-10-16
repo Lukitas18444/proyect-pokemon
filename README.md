@@ -1,73 +1,47 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+⚡️ Resumen del Proyecto
+Este es el Trabajo Práctico Final para la cursada de React.js en Utn.ba.
 
-Currently, two official plugins are available:
+Es una pagina informativa de Pokemones completamente funcional desarrollado con React, que permite a los usuarios ver todos los pokemones con sus respectivos detalles.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🛠️ Tecnologías Clave
+Framework: React.js
 
-## React Compiler
+Manejo de Rutas: React Router DOM
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+Estilos: CSS Modules
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Gestión de Estados: Context API 
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Clonar el Repositorio:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Bash
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+git clone https://github.com/Lukitas18444/tp-final-react-Lucas-Caballero.git
+cd tp-final-react-Lucas-Caballero
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. Instalar Dependencias:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Bash
+
+npm install
+
+3. Configurar Variables de Entorno (Firebase): Crea un archivo llamado .env en la raíz del proyecto y agrega tus credenciales de Firebase:
+
+REACT_APP_FIREBASE_API_KEY=[Tu clave API]
+REACT_APP_FIREBASE_AUTH_DOMAIN=[Tu dominio de autenticación]
+# ... otras claves (projectId, storageBucket, etc.)
+
+4.Iniciar la Aplicación:
+
+Bash
+
+npm start
+La aplicación se abrirá automáticamente en tu navegador en http://localhost:3000
+
+
+Autor
+Lucas Caballero
